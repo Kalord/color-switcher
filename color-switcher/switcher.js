@@ -58,7 +58,11 @@ const getSwitchElements = () => {
 }
 
 const changeColor = (element, hexColor) => {
-    $(element).css('background', `${hexColor}`);
+    if (hexColor) {
+        $(element).css('background', hexColor);
+        if ($(element).attr('fill')) $(element).attr('fill', hexColor);
+    }
+    return;
 }
 
 /**
@@ -73,12 +77,9 @@ let switchElements = getSwitchElements();
 const eventHandler = (event) => {
     hexColor = sourceElement.val() ? sourceElement.val() : sourceElement.html();
 
-    console.log(hexColor);
-
     switchElements.filter((element) => {
         changeColor(switchElements[element], hexColor);
     });
 }
 
-sourceElement.change(eventHandler);
 sourceElement.on('DOMSubtreeModified', eventHandler);
