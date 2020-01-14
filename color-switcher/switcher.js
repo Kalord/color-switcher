@@ -56,3 +56,24 @@ const getSwitchElements = () => {
     let classNameOfSwitchElements = findIdSource().replace(/\w+-/, '');;
     return $(`.${classNameOfSwitchElements}`);
 }
+
+const changeColor = (element, hexColor) => {
+    $(element).css('background', `#${hexColor}`);
+}
+
+/**
+ * HTML элемент, источник цвета
+ */
+let sourceElement = getSource();
+/**
+ * HTML элементы, которые должны изменять цвет
+ */
+let switchElements = getSwitchElements();
+
+sourceElement.change((event) => {
+    hexColor = sourceElement.val();
+
+    switchElements.filter((element) => {
+        changeColor(switchElements[element], hexColor);
+    })
+})
