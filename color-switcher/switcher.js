@@ -46,6 +46,13 @@ const getSource = () => {
     let idSource;
     if (!(idSource = findIdSource())) return false;
 
-    let sourceColor = $(`#${idSource}`);
-    console.log(sourceColor.val());
+    return $(`#${idSource}`);
 };
+
+/**
+ * Получение HTML элементов, которым необходимо поменять цвет
+ */
+const getSwitchElements = () => {
+    let classNameOfSwitchElements = findIdSource().replace(/\w+-/, '');;
+    return $(`.${classNameOfSwitchElements}`);
+}
