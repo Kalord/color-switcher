@@ -44,7 +44,7 @@ const findIdSource = () => {
  */
 const getSource = () => {
     let idSource;
-    if (!(idSource = findSourceByRegExp())) return false;
+    if (!(idSource = findIdSource())) return false;
 
     let sourceColor = $(`#${idSource}`);
     console.log(sourceColor.val());
