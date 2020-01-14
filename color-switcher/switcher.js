@@ -33,7 +33,7 @@
 /**
  * Поиск HTML элемента источника цвета
  */
-const findSourceByRegExp = () => {
+const findIdSource = () => {
     let id = document.body.innerHTML.match(/\id="source-\w+"/ig)[0];
     id = id.replace(/id="/, "");
     return id.substr(0, id.length - 1);
@@ -49,5 +49,3 @@ const getSource = () => {
     let sourceColor = $(`#${idSource}`);
     console.log(sourceColor.val());
 };
-
-getSource();
