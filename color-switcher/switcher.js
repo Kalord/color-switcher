@@ -74,17 +74,44 @@ const isHexNumber = (number) => {
 const isHexColor = (hexColor) => {
     if (hexColor.length != 7 ||
         hexColor[0] != '#' ||
-        !isHexColor(hexColor)
+        !isHexNumber(hexColor)
     ) return false;
     return true;
 }
 
-const changeColor = (element, hexColor) => {
-    if (hexColor && isHexColor(hexColor)) {
-        $(element).css('background', hexColor);
-        if ($(element).attr('fill')) $(element).attr('fill', hexColor);
+/**
+ * Правила для работы с атрибутами
+ * Чтобы поменять цвет текста, необходимо указать атрибут data-switch-text
+ * @return {object}
+ */
+const getSwitchAttrubites = () => {
+    return {
+        'data-switch-text': 'color',
+        'data-switch-border': 'border-color'
     }
-    return;
+}
+
+const changeColor = (element, hexColor) => {
+    if (!isHexColor(hexColor)) return;
+    //Изменение цвета для SVG изображений
+    if ($(element).attr('fill')) {
+        $(element).attr('fill', hexColor);
+        return;
+    }
+
+    switchAttrs = getSwitchAttrubites();
+    elementAttrs = element.attributes
+    hasAttr = false;
+    for (attr in switchAttrs) {
+        if (attr in elementAttrs) {
+            $(element).css(switchAttrs[attr], hexColor);
+            hasAttr = true;
+        }
+    }
+
+    if (hasAttr) return;
+
+    $(element).css('background', hexColor);
 }
 
 /**
