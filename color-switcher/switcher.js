@@ -57,8 +57,30 @@ const getSwitchElements = () => {
     return $(`.${classNameOfSwitchElements}`);
 }
 
+/**
+ * Проверяет, является ли строка шестнадцатеричным числом
+ * @param {string} number
+ */
+const isHexNumber = (number) => {
+    return /[0-9A-Fa-f]{6}/g.test(number);
+}
+
+/**
+ * Проверяет, является ли элемент HEX представлением цвета
+ * вида #000000 - #ffffff
+ * @param {string} hexColor
+ * @return {bool} 
+ */
+const isHexColor = (hexColor) => {
+    if (hexColor.length != 7 ||
+        hexColor[0] != '#' ||
+        !isHexColor(hexColor)
+    ) return false;
+    return true;
+}
+
 const changeColor = (element, hexColor) => {
-    if (hexColor) {
+    if (hexColor && isHexColor(hexColor)) {
         $(element).css('background', hexColor);
         if ($(element).attr('fill')) $(element).attr('fill', hexColor);
     }
