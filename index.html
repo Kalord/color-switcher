@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+    <div id="color-picker" class="cp-default">
+        <div class="picker-wrapper">
+            <div id="picker" class="picker"></div>
+            <div id="picker-indicator" class="picker-indicator"></div>
+        </div>
+        <div class="pcr-wrapper">
+            <div id="pcr" class="pcr"></div>
+            <div id="pcr-indicator" class="pcr-indicator"></div>
+        </div>
+        <ul id="color-values">
+            <li><label>RGB:</label><span id="rgb"></span></li>
+            <li><label>HSV:</label><span id="hsv"></span></li>
+            <li><label>HEX:</label><span class="source-element" id="hex"></span></li>
+            <li>
+                <div id="pcr_bg"></div>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="element-container">
+        <header class="element">Header</header>
+        <div class="element" data-switch-text="true">Element one</div>
+        <footer class="element" data-switch-text="true" data-switch-border="true">Footer</footer>
+    </div>
+
+    <svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" height="400px" width="400px">
+     <rect x="0" y="0" width="400" height="400" 
+          fill="none" stroke="black" stroke-width="5px" stroke-opacity="0.5"/>
+     <g fill-opacity="0.6" stroke="black" stroke-width="0.5px">
+        <circle class="element" cx="200px" cy="200px" r="104px" fill="red"   transform="translate(  0,-52)" />
+        <circle class="element" cx="200px" cy="200px" r="104px" fill="blue"  transform="translate( 60, 52)" />
+        <circle cx="200px" cy="200px" r="104px" fill="green" transform="translate(-60, 52)" />
+     </g>
+    </svg>
+
+    <script src="color-switcher/jquery-3.4.1.min.js "></script>
+    <script type="text/javascript" src="color-switcher/colorpicker.min.js"></script>
+    <script src="color-switcher/switcher.js "></script>
+
+    <script type="text/javascript">
+        cp = ColorPicker(document.getElementById('pcr'), document.getElementById('picker'),
+            function(hex, hsv, rgb, mousePicker, mousepcr) {
+                currentColor = hex;
+                ColorPicker.positionIndicators(
+                    document.getElementById('pcr-indicator'),
+                    document.getElementById('picker-indicator'),
+                    mousepcr, mousePicker);
+
+                document.getElementById('hex').innerHTML = hex;
+                document.getElementById('rgb').innerHTML = 'rgb(' + rgb.r.toFixed() + ',' + rgb.g.toFixed() + ',' + rgb.b.toFixed() + ')';
+                document.getElementById('hsv').innerHTML = 'hsv(' + hsv.h.toFixed() + ',' + hsv.s.toFixed(2) + ',' + hsv.v.toFixed(2) + ')';
+
+                document.getElementById('pcr_bg').style.backgroundColor = hex;
+            });
+        cp.setHex('#D4EDFB');
+    </script>
+</body>
+
+</html>
