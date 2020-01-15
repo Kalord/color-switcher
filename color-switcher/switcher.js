@@ -74,6 +74,10 @@ let sourceElement = getSource();
  */
 let switchElements = getSwitchElements();
 
+/**
+ * Обработчик событий
+ * @param {mixed} event 
+ */
 const eventHandler = (event) => {
     hexColor = sourceElement.val() ? sourceElement.val() : sourceElement.html();
 
@@ -82,4 +86,10 @@ const eventHandler = (event) => {
     });
 }
 
+/**
+ * Установка обработчика на событие DOMSubtreeModified
+ * DOMSubtreeModified - срабатывает каждый раз, когда
+ * происходит изменение в document
+ * @see https://developer.mozilla.org/ru/docs/Web/Events/DOMSubtreeModified
+ */
 sourceElement.on('DOMSubtreeModified', eventHandler);
